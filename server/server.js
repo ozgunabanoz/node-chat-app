@@ -3,6 +3,8 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
+const {generateMessage} = require('./utils/message');
+
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 
@@ -16,31 +18,15 @@ io.on('connection', (socket) => {
 
     console.log('new user connected');
 
-    socket.emit('newMessage', {
+    socket.emit('newMessage', generateMessage('admin', 'welcome'));
 
-        from: 'Admin',
-        text: 'Welcome to the board'
-
-    });
-
-    socket.broadcast.emit('newMessage', {
-
-        from: 'Admin',
-        text: 'A new user has arrived'
-
-    });
+    socket.broadcast.emit('newMessage', generateMessage('admin', 'new user has joined'));
 
     socket.on('createMessage', (newMsg) => {
 
         console.log(newMsg);
 
-        io.emit('newMessage', { // to broadcast the message across all users
-            
-            from: newMsg.from,
-            text: newMsg.text,
-            createdAt: new Date().getTime()
-
-        });
+        io.emit('newMessage', generateMessage(newMsg.from, newMsg.text));
 
         // socket.broadcast.emit('newMessage', { // to broadcast the message across all users but the sender itself
 
