@@ -16,25 +16,17 @@ io.on('connection', (socket) => {
 
     console.log('new user connected');
 
-    socket.emit('newEmail', {
-
-        from: 'mike@example.com',
-        text: 'ayoo',
-        createdAt: 124
-
-    });
-
     socket.on('createMessage', (newMsg) => {
 
         console.log(newMsg);
 
-    });
+        io.emit('newMessage', {
+            
+            from: newMsg.from,
+            text: newMsg.text,
+            createdAt: new Date().getTime()
 
-    socket.emit('newMessage', {
-
-        from: 'ozgun',
-        text: 'yarrak yemisin sen',
-        createdAt: new Date().getTime()
+        });
 
     });
 
