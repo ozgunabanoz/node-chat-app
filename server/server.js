@@ -41,6 +41,8 @@ io.on('connection', (socket) => {
 
         console.log('user disconnected');
 
+        socket.broadcast.emit('newMessage', generateMessage('admin', 'user has left the conversation'));
+
     });
 
 });
