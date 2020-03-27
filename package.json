@@ -16,12 +16,12 @@
   "dependencies": {
     "express": "^4.17.1",
     "moment": "^2.24.0",
-    "mustache": "^3.1.0",
+    "mustache": "^4.0.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "expect": "^24.9.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.19.4"
+    "expect": "^25.2.3",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2"
   }
 }
